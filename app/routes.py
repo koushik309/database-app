@@ -22,7 +22,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('Account Created! You can now log in.', 'success')
-        return redirect(url_for('main.login'))  # ✅ Use 'main.login'
+        return redirect(url_for('main.login'))  
     return render_template('register.html', title='Register', form=form)
 
 @main.route("/login", methods=['GET', 'POST'])
@@ -33,7 +33,7 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
             flash('Login Successful!', 'success')
-            return redirect(url_for('main.home'))  # ✅ Use 'main.home'
+            return redirect(url_for('main.home'))  
         else:
             flash('Login Failed! Check your credentials.', 'danger')
     return render_template('login.html', title='Login', form=form)
@@ -42,4 +42,4 @@ def login():
 def logout():
     logout_user()
     flash("Logged out successfully.", "info")
-    return redirect(url_for("main.home"))  # ✅ Use 'main.home'
+    return redirect(url_for("main.home")) 
